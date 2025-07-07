@@ -2,8 +2,7 @@ parser grammar parserZain;
 
 options { tokenVocab=lexerZain; }
 
-program     : statement+;
-
+program: statement+;
 
 statement   :
              componentDeclaration
@@ -12,7 +11,6 @@ statement   :
             | methodDeclaration
             | variableDeclaration
             | importDeclaration
-
             ;
 
 componentDeclaration
@@ -20,22 +18,22 @@ componentDeclaration
      ;
     componentDeclarationBody
         : (componentBodyElement COMMA? (COMMA componentBodyElement)* )?;
+
     componentBodyElement
         : selector
         | standalone
         | importDeclaration
         | template
         | styles;
+
 selector :SELECTOR COLON STRING_LIT ;
-standalone : STANDALONE COLON isboolean  ;
+standalone : STANDALONE COLON isboolean;
+
 template
     : TEMPLATE COLON_HTML BACKTICK_HTML  element* END_TEMPLATE
     ;
 
 styles :STYLES COLON_CSS OPEN_LIST cssBody CLOSE_LIST COMMA? ;
-
-
-
 
 isboolean :TRUE | FALSE;
 
@@ -53,13 +51,9 @@ classMember
     | propertyDeclaration
     ;
 
-
-
-
 propertyDeclaration
-    : ID COLON type ASSIGN initvalue SEMICOLON?
-    | ID COLON type  (OR ID ASSIGN ID)? SEMICOLON ?
-
+    : ID COLON type ASSIGN initvalue SEMICOLON?         #TypedAssignedProperty
+    | ID COLON type  (OR ID ASSIGN ID)? SEMICOLON?     #OptionalTypedProperty
     ;
 
 methodDeclaration
@@ -70,11 +64,12 @@ methodBody :(statementMethod)* ;
 
 
 statementMethod :
-ID ASSIGN expression SEMICOLON
-| THIS DOT ID ASSIGN ID SEMICOLON
-|THIS DOT ID ASSIGN expression SEMICOLON
-| expression SEMICOLON
+            ID ASSIGN expression SEMICOLON                               #AssignStatement
+            | THIS DOT ID ASSIGN ID SEMICOLON                              #ThisAssignID
+             | THIS DOT ID ASSIGN expression SEMICOLON                      #ThisAssignExpr
+              | expression SEMICOLON                                         #ExprStatement
                      ;
+
 interfaceDeclaration
     : INTERFACE ID LBRACE interfaceMember* RBRACE
     ;
@@ -95,10 +90,10 @@ variableDeclaration
     ;
 
 importDeclaration
-    : IMPORT LBRACE ID RBRACE FROM STRING_LIT SEMICOLON
-    | IMPORT LBRACE COMPONENT RBRACE FROM STRING_LIT SEMICOLON
-    | IMPORTS COLON LBRACKET ID? RBRACKET
-    ;
+        : IMPORT LBRACE ID RBRACE FROM STRING_LIT SEMICOLON             #ImportSingle
+        | IMPORT LBRACE COMPONENT RBRACE FROM STRING_LIT SEMICOLON      #ImportComponent
+        | IMPORTS COLON LBRACKET ID? RBRACKET                           #ImportArray
+        ;
 
 
 
@@ -155,12 +150,12 @@ element
     ;
 
 tag
-    : openingTag element* closingTag
-    | selfClosingTag
+    : openingTag element* closingTag   #NormalTag
+    | selfClosingTag                   #SelfTag
     ;
 
 openingTag
-    : TAG_OPEN_TART_HTML attributes* TAG_CLOSE_END_HTML
+    : TAG_OPEN_START_HTML attributes* TAG_CLOSE_END_HTML
     ;
 
 closingTag
@@ -172,11 +167,11 @@ selfClosingTag
     ;
 
 attributes
-    : NAME_HTML ATTRIBUTE_EQUALS_HTML STRING_HTML
-    | STRUCTURAL_DIR_HTML ATTRIBUTE_EQUALS_HTML STRING_HTML
-    | BINDING_HTML ATTRIBUTE_EQUALS_HTML STRING_HTML
-    | EVENT_BINDING_HTML ATTRIBUTE_EQUALS_HTML STRING_HTML
-    ;
+        : NAME_HTML ATTRIBUTE_EQUALS_HTML STRING_HTML              #NormalAttr
+        | STRUCTURAL_DIR_HTML ATTRIBUTE_EQUALS_HTML STRING_HTML    #StructuralAttr
+        | BINDING_HTML ATTRIBUTE_EQUALS_HTML STRING_HTML           #BindingAttr
+        | EVENT_BINDING_HTML ATTRIBUTE_EQUALS_HTML STRING_HTML     #EventAttr
+        ;
 
 interpolation
     : INTERPOLATION_START_HTML NAME_HTML INTERPOLATION_END_HTML

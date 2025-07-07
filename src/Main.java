@@ -1,7 +1,5 @@
 
 import AST.Program;
-import Grammers.lexerZain;
-import Grammers.parserZain;
 
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -10,6 +8,8 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import visitor.VisitorAngular;
 //myTextLanguage1
 import java.io.IOException;
+import Grammers.lexerZain;
+import Grammers.parserZain;
 public class Main {
     public static void main(String[] args) {
         String source = "tests/test2.txt";
