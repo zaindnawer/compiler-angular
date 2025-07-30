@@ -1,0 +1,11 @@
+Syntax Error : 
+Error in line 8:14 missing ')' at 'onClick'
+Error in line 8:48 no viable alternative at input '(count + 1);'
+Error in line 8:48 extraneous input ';' expecting {'}', ','}
+Error in line 8:60 no viable alternative at input '</'
+Error in line 10:48 no viable alternative at input '<button onClick={() => setCount(count - 1);'
+Error in line 10:48 no viable alternative at input '(count - 1);'
+Error in line 10:48 extraneous input ';' expecting {'}', ','}
+Error in line 10:60 no viable alternative at input '</'
+Error in line 11:5 no viable alternative at input '</'
+Error in line 12:2 mismatched input ')' expecting {'[', '(', '{', '++', '--', '+', '-', '~', '!', '<', 'null', BooleanLiteral, DecimalLiteral, 'useEffect', 'useState', 'useRef', 'createElement', 'typeof', 'new', 'void', 'function', 'this', 'as', 'from', 'of', 'import', Identifier, StringLiteral}

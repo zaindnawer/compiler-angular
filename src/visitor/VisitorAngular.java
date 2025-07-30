@@ -1,42 +1,45 @@
 package visitor;
 
-import ErrorHandling.ErrorDetection;
-import symbolTable.Row;
-import symbolTable.SymbolTable;
 import AST.*;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import Grammers.parserZainBaseVisitor;
 import Grammers.parserZain;
+import SemanticCheck.SemanticCheck;
+import SymbolTable.Scope.GlobalScope;
+import SymbolTable.Scope.LocalScope;
+import SymbolTable.Symbol.SymbolBase;
+import SymbolTable.SymbolTable;
+import org.antlr.v4.runtime.ParserRuleContext;
+
+import java.util.Objects;
+import java.util.Stack;
 
 public class VisitorAngular extends parserZainBaseVisitor {
-    List<SymbolTable> symbolTables = new ArrayList<>();
+    private Stack<GlobalScope> globalStack;
+    private Stack<LocalScope> scopeStack;
+    private SymbolTable symbolTable;
+    SemanticCheck semanticCheck = new SemanticCheck();
+    GlobalScope globalScope = new GlobalScope(null);
 
-    public void CreateFiveSymbolTable() {
-        for (int i = 0; i < 5; i++) {
-            symbolTables.add(new SymbolTable());
-        }
-
+    public VisitorAngular(SymbolTable symbolTable) {
+        this.symbolTable = symbolTable;
+        globalStack = new Stack<>();
+        scopeStack = new Stack<>();
     }
 
     @Override
     public Program visitProgram(parserZain.ProgramContext ctx) {
-        CreateFiveSymbolTable();
+        globalScope.setName("global-program");
+        globalStack.push(globalScope);
+        this.symbolTable.addGlobalScope(globalScope);
+
         Program prog = new Program();
         for (int i = 0; i < ctx.statement().size(); i++) {
             if (ctx.statement(i) != null) {
                 prog.getStatments().add(visitStatement(ctx.statement(i)));
             }
         }
-        for (SymbolTable symbolTable : symbolTables) {
-            symbolTable.print();
-            System.out.println();
-        }
-        ErrorDetection errorDetection = new ErrorDetection();
-        errorDetection.setSymbolTables(this.symbolTables);
-        errorDetection.checkError();
-        errorDetection.printErrors();
         return prog;
     }
 
@@ -49,14 +52,7 @@ public class VisitorAngular extends parserZainBaseVisitor {
         }
 
         if (ctx.importDeclaration() != null) {
-
-            //statment.setImportDeclaration(visitImportDeclaration(ctx.importDeclaration()));
-
             visit(ctx.importDeclaration()); // test2
-//            Row row =new Row() ;
-//            row.setType("declarationImport");
-//            row.setValue(ctx.importDeclaration().ID().getText());
-//            symbolTables.get(0).setRow(row);
         }
         if (ctx.classDeclaration() != null) {
             statment.setClassDeclaration(visitClassDeclaration(ctx.classDeclaration()));
@@ -87,10 +83,29 @@ public class VisitorAngular extends parserZainBaseVisitor {
     @Override
     public OptionalTypedProperty visitOptionalTypedProperty(parserZain.OptionalTypedPropertyContext ctx) {
         OptionalTypedProperty optionalTypedProperty = new OptionalTypedProperty();
+
+        SymbolBase symbolBase = new SymbolBase();
         for (int i = 0; i < ctx.ID().size(); i++) {
             optionalTypedProperty.getID().add(ctx.ID().get(i).getText());
+            symbolBase.setName(ctx.ID().get(i).getText());
         }
+        ParserRuleContext parent = ctx.getParent();
+
+        LocalScope localScope = null;
+
+        if (parent instanceof parserZain.InterfaceMemberContext) {
+            parserZain.InterfaceMemberContext interfaceMember = (parserZain.InterfaceMemberContext) parent;
+            for (int i=0; i < scopeStack.size(); i++){
+                if (Objects.equals(scopeStack.get(i).getName(), interfaceMember.getParent().getChild(1).getText())){
+                    localScope = scopeStack.get(i);
+                }
+            }
+        }
+
         optionalTypedProperty.setType(visitType(ctx.type()));
+        symbolBase.setType(ctx.type().getText());
+
+        localScope.define(symbolBase);
 
         return optionalTypedProperty;
     }
@@ -131,22 +146,38 @@ public class VisitorAngular extends parserZainBaseVisitor {
 
     @Override
     public ImportSingle visitImportSingle(parserZain.ImportSingleContext ctx) {
+        SymbolBase symbolBase = new SymbolBase();
+
         ImportSingle importSingle = new ImportSingle();
         importSingle.setImport(ctx.IMPORT().getText());
         importSingle.setFrom(ctx.FROM().getText());
         importSingle.setID(ctx.ID().getText());
         importSingle.setSTRING_LIT(ctx.STRING_LIT().getText());
+
+        symbolBase.setName(ctx.ID().getText());
+        symbolBase.setType(ctx.IMPORT().getText());
+        symbolBase.setValue(ctx.STRING_LIT().getText());
+
+        globalScope.define(symbolBase);
         return importSingle;
     }
 
     @Override
     public ImportComponent visitImportComponent(parserZain.ImportComponentContext ctx) {
+
+        SymbolBase symbolBase = new SymbolBase();
+
         ImportComponent importComponent = new ImportComponent();
         importComponent.setImport(ctx.IMPORT().getText());
         importComponent.setFrom(ctx.FROM().getText());
         importComponent.setCOMPONENT(ctx.COMPONENT().getText());
         importComponent.setSTRING_LIT(ctx.STRING_LIT().getText());
 
+        symbolBase.setName(ctx.COMPONENT().getText());
+        symbolBase.setType(ctx.IMPORT().getText());
+        symbolBase.setValue(ctx.STRING_LIT().getText());
+
+        globalScope.define(symbolBase);
         return importComponent;
     }
 
@@ -156,6 +187,7 @@ public class VisitorAngular extends parserZainBaseVisitor {
         importArray.setImports(ctx.IMPORTS().getText());
         if (ctx.ID() != null) {
             importArray.setID(ctx.ID().getText());
+            semanticCheck.isImport(ctx.ID().getText(),globalScope);
         }
         return importArray;
     }
@@ -185,9 +217,7 @@ public class VisitorAngular extends parserZainBaseVisitor {
     public Attributes visitNormalAttr(parserZain.NormalAttrContext ctx) {
         NormalAttr normalAttr = new NormalAttr();
         normalAttr.setSTRING_HTML(ctx.STRING_HTML().getText());
-        System.out.println(normalAttr.getNAME_HTML());
         normalAttr.setNAME_HTML(ctx.NAME_HTML().getText());
-        System.out.println(normalAttr);
         return normalAttr;
     }
 
@@ -218,13 +248,15 @@ public class VisitorAngular extends parserZainBaseVisitor {
 
     @Override
     public ClassDeclaration visitClassDeclaration(parserZain.ClassDeclarationContext ctx) {
+        LocalScope localScope = new LocalScope(globalScope);
+
+        localScope.setName(ctx.ID().getText());
+        scopeStack.push(localScope);
+        globalScope.nest(localScope);
+
         ClassDeclaration classDeclaration = new ClassDeclaration();
         if (ctx.ID().getText() != null) {
             classDeclaration.setNameClass(ctx.ID().getText());
-//            Row row =new Row() ;
-//            row.setType("ID");
-//            row.setValue(classDeclaration.getNameClass());
-//            symbolTable.getRows().add(row);
         }
         classDeclaration.setClassDeclarationBody(visitClassDeclarationBody(ctx.classDeclarationBody()));
 
@@ -298,33 +330,18 @@ public class VisitorAngular extends parserZainBaseVisitor {
         TypeV typeV = new TypeV();
         if (ctx.BOOLEAN_TYPE() != null && ctx.BOOLEAN_TYPE().getText() != null) {
             typeV.setIsboolean(ctx.BOOLEAN_TYPE().getText());
-//            Row row =new Row() ;
-//            row.setType("boolean");
-//            row.setValue(typeV.getIsboolean().toString());
-//            symbolTable.getRows().add(row);
-
-
         }
         if (ctx.ID() != null && ctx.ID().getText() != null) {
             typeV.setString_type(ctx.ID().getText());
-//            Row row =new Row() ;
-//            row.setType("ID");
-//            row.setValue(typeV.getString_type());
-//            symbolTable.getRows().add(row);
-
-
         }
         if (ctx.list() != null && ctx.list().getText() != null) {
             typeV.setListV(visitList(ctx.list()));
-
-
-        } else if (ctx.NUMBER_TYPE() != null && ctx.NUMBER_TYPE().getText() != null) {
+        }
+        if (ctx.NUMBER_TYPE() != null && ctx.NUMBER_TYPE().getText() != null) {
             typeV.setNumber_type(ctx.NUMBER_TYPE().getText());
-//            Row row =new Row() ;
-//            row.setType("NUMBER");
-//            row.setValue(typeV.getNumber_type());
-//            symbolTable.getRows().add(row);
-
+        }
+        if (ctx.STRING_TYPE() != null && ctx.STRING_TYPE().getText() != null) {
+            typeV.setString_type(ctx.STRING_TYPE().getText());
         }
         return typeV;
     }
@@ -567,18 +584,12 @@ public class VisitorAngular extends parserZainBaseVisitor {
     @Override
     public ComponentDeclaration visitComponentDeclaration(parserZain.ComponentDeclarationContext ctx) {
         ComponentDeclaration componentDeclaration = new ComponentDeclaration();
+        semanticCheck.isImport(ctx.COMPONENT().getText(),globalScope);
         if (ctx.DECORATOR() != null && ctx.DECORATOR() != null) {
             componentDeclaration.setDecorato(ctx.DECORATOR().getText());
-//            Row row =new Row() ;
-//            row.setType("DECORATER");
-//            row.setValue(componentDeclaration.getDecorato());
-//            symbolTable.getRows().add(row);
-
         }
         if (ctx.componentDeclarationBody() != null) {
-
             componentDeclaration.setComponentDeclarationBody(visitComponentDeclarationBody(ctx.componentDeclarationBody()));
-
         }
 
         return componentDeclaration;
@@ -624,11 +635,6 @@ public class VisitorAngular extends parserZainBaseVisitor {
         Selector selector = new Selector();
         if (ctx.STRING_LIT() != null) {
             selector.setSTRING_LIT(ctx.STRING_LIT().getText());
-            Row row = new Row();
-            row.setType("selectorProperty");
-            row.setValue(ctx.SELECTOR().getText());
-            symbolTables.get(2).setRow(row);
-
         }
         return selector;
     }
@@ -646,10 +652,6 @@ public class VisitorAngular extends parserZainBaseVisitor {
     @Override
     public Template visitTemplate(parserZain.TemplateContext ctx) {
         Template template = new Template();
-        Row row = new Row();
-        row.setType("templateProperty");
-        row.setValue(ctx.TEMPLATE().getText());
-        symbolTables.get(2).setRow(row);
         for (int i = 0; i < ctx.element().size(); i++) {
             if (ctx.element(i) != null) {
                 template.getElement().add(visitElement(ctx.element(i)));
@@ -794,10 +796,6 @@ public class VisitorAngular extends parserZainBaseVisitor {
         Bodyelement bodyelement = new Bodyelement();
         if (ctx.ID_CSS() != null && ctx.ID_CSS().getText() != null) {
             bodyelement.setId_css(ctx.ID_CSS().getText());
-            Row row = new Row();
-            row.setType("ID_CSS");
-            row.setValue(bodyelement.getId_css());
-            symbolTables.get(4).setRow(row);
 
         }
         if (ctx.cssValue() != null) {
@@ -824,6 +822,11 @@ public class VisitorAngular extends parserZainBaseVisitor {
     @Override
     public InterfaceDeclaration visitInterfaceDeclaration(parserZain.InterfaceDeclarationContext ctx) {
         InterfaceDeclaration interfaceDeclaration = new InterfaceDeclaration();
+        LocalScope localScope = new LocalScope(globalScope);
+        localScope.setName(ctx.ID().getText());
+        scopeStack.push(localScope);
+        globalScope.nest(localScope);
+
         if (ctx.interfaceMember() != null) {
 
             for (int i = 0; i < ctx.interfaceMember().size(); i++) {
@@ -857,10 +860,6 @@ public class VisitorAngular extends parserZainBaseVisitor {
             for (int i = 0; i < ctx.initvalue().size(); i++) {
                 if (ctx.initvalue(i).getText() != null && ctx.initvalue(i) != null) {
                     bodyObject.getInitvalues().add(visitInitvalue(ctx.initvalue(i)));
-                    Row row = new Row();
-                    row.setType("objectFunction");
-                    row.setValue(ctx.ID(i).getText());
-                    symbolTables.get(0).setRow(row);
                 }
             }
         }

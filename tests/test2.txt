@@ -1,6 +1,52 @@
-import { Component } from '@angular/core';
+/*
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 
+@Component({
+  selector: 'app-product',
+  standalone: true,
+  imports: [CommonModule]
+})
+*/
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  type: string;
+  imageUrl: string;
+}
+
+interface P {
+  id: number;
+  imageUrl: string;
+}
+
+export class ProductComponent {
+  products: Product[] = [
+    {
+      id: 1,
+      name: 'MacBook Pro 16"',
+      price: 2499,
+      type: 'Laptop',
+      imageUrl: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16-spacegray-gallery1-202301?wid=2000&hei=2000&fmt=jpeg&qlt=95&.v=1671304673229',
+    }
+  ]
+  }
+export class qqq {
+  products: Product[] = [
+    {
+      id: 1,
+      name: 'MacBook Pro 16"',
+      price: 2499,
+      type: 'Laptop',
+      imageUrl: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16-spacegray-gallery1-202301?wid=2000&hei=2000&fmt=jpeg&qlt=95&.v=1671304673229',
+    }
+  ]
+  }
+
+
+/*
 interface Product {
   id: number;
   name: string;
@@ -12,6 +58,7 @@ interface Product {
 @Component({
   selector: 'app-product',
   standalone: true,
+  imports: [CommonModule],
   styles: [
     `
       .container {
@@ -51,7 +98,6 @@ interface Product {
       }
     `,
   ],
-  imports: [CommonModule],
   template: `
     <div class="container">
       <div class="product-list">
@@ -112,3 +158,4 @@ export class ProductComponent {
     this.selectedProduct = product;
   }
 }
+*/

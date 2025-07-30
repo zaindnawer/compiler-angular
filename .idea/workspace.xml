@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7ece1661-6ee0-45d8-9a14-309798ddd26b" name="Changes" comment="'upload'">
+      <change afterPath="$PROJECT_DIR$/src/symbolTable/Scope/BaseScope.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/symbolTable/Scope/GlobalScope.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/symbolTable/Scope/LocalScope.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/symbolTable/Scope/Scope.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/symbolTable/Symbol/Symbol.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/symbolTable/Symbol/SymbolBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompilerZain/visitor/VisitorAngular.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompilerZain/visitor/VisitorAngular.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ErrorHandling/ErrorDetection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ErrorHandling/ErrorDetection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/symbolTable/Row.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/symbolTable/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/SymbolTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visitor/VisitorAngular.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/visitor/VisitorAngular.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test1.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2xgyqd0skjBo581f16ajz5eyPjs" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Zain/Desktop/compiler-angular",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.idesettings.emmet"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Zain\Desktop\compiler-angular" />
+      <recent name="C:\Users\Zain\Desktop\compiler-angular\src" />
+      <recent name="C:\Users\Zain\Desktop\compiler-angular\src\symbolTable" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+      <recent name="visitor" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="CompilerZain" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7ece1661-6ee0-45d8-9a14-309798ddd26b" name="Changes" comment="" />
+      <created>1748374202328</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1748374202328</updated>
+    </task>
+    <task id="LOCAL-00001" summary="'second commit : error handling'">
+      <option name="closed" value="true" />
+      <created>1748974302920</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1748974302920</updated>
+    </task>
+    <task id="LOCAL-00002" summary="'second commit : error handling'">
+      <option name="closed" value="true" />
+      <created>1748974683611</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1748974683611</updated>
+    </task>
+    <task id="LOCAL-00003" summary="'second commit : error handling'">
+      <option name="closed" value="true" />
+      <created>1748974744400</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1748974744400</updated>
+    </task>
+    <task id="LOCAL-00004" summary="'second commit : error handling'">
+      <option name="closed" value="true" />
+      <created>1748974849876</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1748974849876</updated>
+    </task>
+    <task id="LOCAL-00005" summary="'second commit : error handling'">
+      <option name="closed" value="true" />
+      <created>1748975348611</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1748975348611</updated>
+    </task>
+    <task id="LOCAL-00006" summary="'upload'">
+      <option name="closed" value="true" />
+      <created>1748975381407</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1748975381407</updated>
+    </task>
+    <task id="LOCAL-00007" summary="'upload'">
+      <option name="closed" value="true" />
+      <created>1748975452154</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1748975452154</updated>
+    </task>
+    <task id="LOCAL-00008" summary="'upload'">
+      <option name="closed" value="true" />
+      <created>1751867438715</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1751867438715</updated>
+    </task>
+    <task id="LOCAL-00009" summary="'upload'">
+      <option name="closed" value="true" />
+      <created>1751867685129</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1751867685129</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/zaindnawer-patch-1" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="'second commit : error handling'" />
+    <MESSAGE value="'upload'" />
+    <option name="LAST_COMMIT_MESSAGE" value="'upload'" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

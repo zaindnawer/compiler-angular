@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>React App</title>
+<link rel="stylesheet" href="generate.css"/>
+</head>
+<body>
+
+<div id="app"></div>
+
+
+<script>
+const React  = "react"
+const {useState}  = 'react'
+const img1  = "../Files/pizza.png"
+const img2  = "../Files/salad.png"
+const img3  = "../Files/sandwich.png"
+const img4  = "../Files/soup.png"
+const products=[{productId:0
+,name:"ProductName1"
+,price:200
+,imgSrc:img1
+,details:"Product Details 1"
+ },
+{productId:1
+,name:"ProductName2"
+,price:400
+,imgSrc:img2
+,details:"Product Details 2"
+ },
+{productId:2
+,name:"ProductName3"
+,price:700
+,imgSrc:img3
+,details:"Product Details 3"
+ },
+{productId:3
+,name:"ProductName4"
+,price:500
+,imgSrc:img4
+,details:"Product Details 4"
+ }]
+let ChoosenProduct=null
+function App (){
+ const app = document.getElementById('app');
+        app.innerHTML = '';
+
+var div0= document.createElement('div')
+products.map((item) => {
+var button1= document.createElement('button')
+button1.onclick = () => setChoosenProduct(item.productId)
+button1.appendChild(ProductList(item))
+app.appendChild(button1)})
+app.appendChild(Productdetails(products[ChoosenProduct]))
+}
+function setChoosenProduct (parameter) {
+ChoosenProduct = parameter;
+App();
+}
+App();
+function Productdetails (props){
+
+var div4= document.createElement('div')
+div4.classList.add("product-details")
+
+var h15= document.createElement('h1')
+h15.textContent = props.name
+div4.appendChild(h15)
+var img6= document.createElement('img')
+img6.src =props.imgSrc
+div4.appendChild(img6)
+var p7= document.createElement('p')
+p7.textContent = props.price
+div4.appendChild(p7)
+var p8= document.createElement('p')
+p8.textContent = props.details
+div4.appendChild(p8)
+return div4
+}
+function ProductList (props){
+
+var div9= document.createElement('div')
+
+var h110= document.createElement('h1')
+h110.textContent = props.name
+div9.appendChild(h110)
+var img11= document.createElement('img')
+img11.src =props.imgSrc
+div9.appendChild(img11)
+return div9
+}
+
+
+</script>
+</body>
+</html>

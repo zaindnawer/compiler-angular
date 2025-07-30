@@ -1,0 +1,6 @@
+Symbol Table
+ 	global-program    symbols: []{
+ 	 	    Product    symbols: [{name='price' , type='number'}, {name='imageUrl' , type='string'}, {name='name' , type='string'}, {name='id' , type='number'}, {name='type' , type='string'}]{}
+ 	 	          P    symbols: [{name='imageUrl' , type='string'}, {name='id' , type='number'}]{}
+ 	 	 ProductComponent    symbols: []{}
+ 	 	        qqq    symbols: []{}}
