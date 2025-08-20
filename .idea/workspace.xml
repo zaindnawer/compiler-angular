@@ -5,16 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ece1661-6ee0-45d8-9a14-309798ddd26b" name="Changes" comment="'upload'">
-      <change afterPath="$PROJECT_DIR$/src/symbolTable/Scope/BaseScope.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/symbolTable/Scope/GlobalScope.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/symbolTable/Scope/LocalScope.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/symbolTable/Scope/Scope.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/symbolTable/Symbol/Symbol.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/symbolTable/Symbol/SymbolBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CompilerZain/visitor/VisitorAngular.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompilerZain/visitor/VisitorAngular.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ErrorHandling/ErrorDetection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ErrorHandling/ErrorDetection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/symbolTable/Row.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/symbolTable/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/SymbolTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Result/GeneratedCode.html" beforeDir="false" afterPath="$PROJECT_DIR$/Result/GeneratedCode.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Result/SymbolTable.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Result/SymbolTable.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Result/isImportError.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Result/isImportError.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CompilerZain/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CompilerZain/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AST/BodyObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AST/BodyObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AST/CssElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AST/CssElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/visitor/VisitorAngular.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/visitor/VisitorAngular.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test1.txt" afterDir="false" />
     </list>
@@ -61,7 +59,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Zain/Desktop/compiler-angular",
+    "last_opened_file_path": "C:/Users/Zain/Desktop/compiler-angular/src",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -70,8 +68,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Zain\Desktop\compiler-angular" />
       <recent name="C:\Users\Zain\Desktop\compiler-angular\src" />
+      <recent name="C:\Users\Zain\Desktop\compiler-angular" />
       <recent name="C:\Users\Zain\Desktop\compiler-angular\src\symbolTable" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">

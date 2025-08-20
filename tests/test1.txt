@@ -132,6 +132,6 @@ export class AppComponent {
 
   selectProduct(product: Product): void {
     this.selectedProduct = product;
-
   }
+
 }

@@ -3,6 +3,7 @@ import AST.Program;
 
 import SymbolTable.Scope.GlobalScope;
 import SymbolTable.SymbolTable;
+import codeGeneration.Generator;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -15,7 +16,7 @@ import Grammers.lexerZain;
 import Grammers.parserZain;
 public class Main {
     public static void main(String[] args) {
-        String source = "tests/test2.txt";
+        String source = "tests/test1.txt";
         try {
             CharStream cs = CharStreams.fromFileName(source);
             lexerZain lexer = new lexerZain(cs);
@@ -28,6 +29,9 @@ public class Main {
             VisitorAngular visitor=new VisitorAngular(symbolTable);
             Program doc = (Program) visitor.visit(tree);
             System.out.println(doc);
+
+            Generator generator = new Generator();
+            generator.generate(doc);
 
             FileWriter st = new FileWriter("Result\\SymbolTable.txt");
             st.append("Symbol Table\n");

@@ -1,95 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>React App</title>
-<link rel="stylesheet" href="generate.css"/>
+<style>
+.container  {
+display:flex ;
+gap:20px ;
+}
+.product-list  {
+width:30% ;
+border-right:1px solid #ddd ;
+}
+.product-list ul  {
+list-style-type:none ;
+padding:0 ;
+}
+.product-list li  {
+display:flex ;
+align-items:center ;
+gap:10px ;
+padding:10px ;
+cursor:pointer ;
+border-bottom:1px solid #ddd ;
+}
+.product-list img  {
+width:50px ;
+height:50px ;
+object-fit:cover ;
+}
+.product-details  {
+width:70% ;
+padding:10px ;
+}
+.product-details img  {
+width:200px ;
+height:200px ;
+object-fit:cover ;
+margin-bottom:20px ;
+age:8 ;
+}
+</style>
+<title>Angular App</title>
 </head>
 <body>
 
-<div id="app"></div>
-
-
 <script>
-const React  = "react"
-const {useState}  = 'react'
-const img1  = "../Files/pizza.png"
-const img2  = "../Files/salad.png"
-const img3  = "../Files/sandwich.png"
-const img4  = "../Files/soup.png"
-const products=[{productId:0
-,name:"ProductName1"
-,price:200
-,imgSrc:img1
-,details:"Product Details 1"
- },
-{productId:1
-,name:"ProductName2"
-,price:400
-,imgSrc:img2
-,details:"Product Details 2"
- },
-{productId:2
-,name:"ProductName3"
-,price:700
-,imgSrc:img3
-,details:"Product Details 3"
- },
-{productId:3
-,name:"ProductName4"
-,price:500
-,imgSrc:img4
-,details:"Product Details 4"
- }]
-let ChoosenProduct=null
-function App (){
- const app = document.getElementById('app');
-        app.innerHTML = '';
 
-var div0= document.createElement('div')
-products.map((item) => {
-var button1= document.createElement('button')
-button1.onclick = () => setChoosenProduct(item.productId)
-button1.appendChild(ProductList(item))
-app.appendChild(button1)})
-app.appendChild(Productdetails(products[ChoosenProduct]))
-}
-function setChoosenProduct (parameter) {
-ChoosenProduct = parameter;
-App();
-}
-App();
-function Productdetails (props){
+const products =   [
+{
+id: 1,
+name: 'Apple iPhone 15 Pro',
+price: 999,
+type: 'Smartphone',
+imageUrl: 'https://via.placeholder.com/150/0000FF/FFFFFF?text=iPhone+15+Pro',
 
-var div4= document.createElement('div')
-div4.classList.add("product-details")
+},
+{
+id: 2,
+name: 'Samsung Galaxy S23 Ultra',
+price: 1199,
+type: 'Smartphone',
+imageUrl: 'https://via.placeholder.com/150/FF0000/FFFFFF?text=Galaxy+S23+Ultra',
 
-var h15= document.createElement('h1')
-h15.textContent = props.name
-div4.appendChild(h15)
-var img6= document.createElement('img')
-img6.src =props.imgSrc
-div4.appendChild(img6)
-var p7= document.createElement('p')
-p7.textContent = props.price
-div4.appendChild(p7)
-var p8= document.createElement('p')
-p8.textContent = props.details
-div4.appendChild(p8)
-return div4
-}
-function ProductList (props){
+},
+{
+id: 3,
+name: 'Google Pixel 8 Pro',
+price: 899,
+type: 'Smartphone',
+imageUrl: 'https://via.placeholder.com/150/008000/FFFFFF?text=Pixel+8+Pro',
 
-var div9= document.createElement('div')
+},
+{
+id: 4,
+name: 'OnePlus 11',
+price: 699,
+type: 'Smartphone',
+imageUrl: 'https://via.placeholder.com/150/FFA500/FFFFFF?text=OnePlus+11',
 
-var h110= document.createElement('h1')
-h110.textContent = props.name
-div9.appendChild(h110)
-var img11= document.createElement('img')
-img11.src =props.imgSrc
-div9.appendChild(img11)
-return div9
-}
+},
+{
+id: 5,
+name: 'Xiaomi 13 Pro',
+price: 799,
+type: 'Smartphone',
+imageUrl: 'https://via.placeholder.com/150/800080/FFFFFF?text=Xiaomi+13+Pro',
 
+},
+{
+id: 6,
+name: 'Sony Xperia 1 V',
+price: 1299,
+type: 'Smartphone',
+imageUrl: 'https://via.placeholder.com/150/FFC0CB/FFFFFF?text=Xperia+1+V',
+
+},
+
+]
 
 </script>
 </body>

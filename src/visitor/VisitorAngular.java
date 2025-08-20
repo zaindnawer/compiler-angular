@@ -49,6 +49,7 @@ public class VisitorAngular extends parserZainBaseVisitor {
 
         if (ctx.componentDeclaration() != null) {
             statment.setComponentDeclaration(visitComponentDeclaration(ctx.componentDeclaration()));
+            System.out.println("nnnnn");
         }
 
         if (ctx.importDeclaration() != null) {
@@ -71,7 +72,9 @@ public class VisitorAngular extends parserZainBaseVisitor {
 
     @Override
     public TypedAssignedProperty visitTypedAssignedProperty(parserZain.TypedAssignedPropertyContext ctx) {
+        System.out.println("visitooooo");
         TypedAssignedProperty typedAssignedProperty = new TypedAssignedProperty();
+        System.out.println(ctx.ID());
         typedAssignedProperty.setID(ctx.ID().getText());
         typedAssignedProperty.setType(visitType(ctx.type()));
         typedAssignedProperty.setInitvalue(visitInitvalue(ctx.initvalue()));
@@ -105,7 +108,9 @@ public class VisitorAngular extends parserZainBaseVisitor {
         optionalTypedProperty.setType(visitType(ctx.type()));
         symbolBase.setType(ctx.type().getText());
 
-        localScope.define(symbolBase);
+        if (localScope != null){
+            localScope.define(symbolBase);
+        }
 
         return optionalTypedProperty;
     }
@@ -282,8 +287,12 @@ public class VisitorAngular extends parserZainBaseVisitor {
     public ClassMember visitClassMember(parserZain.ClassMemberContext ctx) {
         ClassMember classMember = new ClassMember();
         if (ctx.propertyDeclaration() != null) {
-//            classMember.setPropertyDeclaration(visitPropertyDeclaration(ctx.propertyDeclaration()));
-            visit(ctx.propertyDeclaration()); // test1
+            Object res = visit(ctx.propertyDeclaration()); // test1
+            if (res instanceof TypedAssignedProperty){
+                TypedAssignedProperty typedAssignedProperty = (TypedAssignedProperty) res;
+                classMember.setPropertyDeclaration(typedAssignedProperty);
+            }
+
         }
         if (ctx.methodDeclaration() != null) {
             classMember.setMethodDeclaration(visitMethodDeclaration(ctx.methodDeclaration()));
@@ -778,6 +787,9 @@ public class VisitorAngular extends parserZainBaseVisitor {
     @Override
     public CssElement visitCsselement(parserZain.CsselementContext ctx) {
         CssElement cssElement = new CssElement();
+        for (int i = 0; i < ctx.ID_CSS().size(); i++) {
+            cssElement.getDOT_CSS().add(ctx.ID_CSS().get(i).getText());
+        }
         if (ctx.bodyelement() != null) {
             for (int i = 0; i < ctx.bodyelement().size(); i++) {
                 if (ctx.bodyelement(i) != null) {
@@ -861,6 +873,11 @@ public class VisitorAngular extends parserZainBaseVisitor {
                 if (ctx.initvalue(i).getText() != null && ctx.initvalue(i) != null) {
                     bodyObject.getInitvalues().add(visitInitvalue(ctx.initvalue(i)));
                 }
+            }
+        }
+        if (ctx.ID() != null) {
+            for (int i = 0; i < ctx.ID().size(); i++) {
+                bodyObject.getID().add(ctx.ID().get(i).getText());
             }
         }
         return bodyObject;
