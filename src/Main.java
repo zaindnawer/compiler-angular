@@ -16,7 +16,7 @@ import Grammers.lexerZain;
 import Grammers.parserZain;
 public class Main {
     public static void main(String[] args) {
-        String source = "tests/test1.txt";
+        String source = "tests/test2.txt";
         try {
             CharStream cs = CharStreams.fromFileName(source);
             lexerZain lexer = new lexerZain(cs);

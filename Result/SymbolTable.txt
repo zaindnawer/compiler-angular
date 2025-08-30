@@ -1,4 +1,6 @@
 Symbol Table
- 	global-program    symbols: [{name='Component', value=''@angular/core'' , type='import'}]{
+ 	global-program    symbols: [{name='CommonModule', value=''@angular/common'' , type='import'}, {name='Component', value=''@angular/core'' , type='import'}]{
  	 	    Product    symbols: [{name='price' , type='number'}, {name='imageUrl' , type='string'}, {name='name' , type='string'}, {name='id' , type='number'}, {name='type' , type='string'}]{}
- 	 	 AppComponent    symbols: []{}}
+ 	 	          P    symbols: [{name='imageUrl' , type='string'}, {name='id' , type='number'}]{}
+ 	 	 ProductComponent    symbols: []{}
+ 	 	        qqq    symbols: []{}}
